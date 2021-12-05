@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+</head>
+<body style="background-color: blueviolet;">
+    <img src="open.png">
+    <div class="title"><h1><a style="color: orange;">Open</a>Weather</h1></div>
+    <div class="container">
+        <input type="text" placeholder="  Write a city" class="input" id="city" onblur="getWeather()">
+    </div>
+        
+    <div class="answer"><ul>
+            <li id="country">Country:</li>
+            <li id="c">City:</li>
+            <li id="temp">Temperature:</li>
+        </ul>
+    </div>
+    
+    <style>
+        .answer{
+font-size: 32px;
+margin-left: 100px;
+        }
+        .input{
+            font-size: 24px;
+            width: 200px;
+            height: 35px;
+            border: blue solid 1px;
+            border-radius: 10px;
+            padding-left: 10px;
+        }
+        .container{
+            
+            margin-top: 100px;
+            margin-left: 100px;
+           
+        }
+    </style>
+
+    <script>
+        function getWeather(){
+            let cityName = document.getElementById("city");
+            fetch(`https:api.openweathermap.org/data/2.5/weather?q=${cityName.value}&appid=6508c80d1115b29a5bb0e65c0009916d`)
+            .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        let count = document.getElementById("country")
+        let city = document.getElementById("c")
+        let temp = document.getElementById("temp")
+
+        count.innerHTML = data.sys.country;
+        city.innerHTML = data.name;
+        temp.innerHTML = data.main.temp
+    })
+        }
+
+   
+    
+    </script>
+</body>
+</html>
